@@ -7,6 +7,7 @@
 ## Commands
 
     <div>
+    <p>
     [/rplay or /rp] [<YT link> or search]: to play or add the song to the queue;
         e.g.:
             /rplay https://www.youtube.com/watch?v=dQw4w9WgXcQ
@@ -23,6 +24,7 @@
     [/rleave or /rl]: to leave the channel;
 
     [/rclean or /rc]: to clean queue and stop playing;
+    </p>
     </div>
 
 ## Requirements
@@ -61,4 +63,3 @@
 
     Lastly, type *python main.py* to run your bot. You should see the bot going online on the Discord server you invited it to. You can now use the commands (see Commands above) to play songs on the server
     </p>
-    
