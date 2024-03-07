@@ -1,7 +1,7 @@
 ## RiverBot
-
-    This is a Discord music bot.
-
+<div style='width: 150px'>
+    <p>This is a Discord music bot. This is a Discord music bot. This is a Discord music bot. This is a Discord music bot.This is a Discord music bot.</p>
+</div>
 
 ## Commands
 
