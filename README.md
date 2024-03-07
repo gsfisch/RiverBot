@@ -55,4 +55,3 @@
     After that, type *pip install -r requirements.txt* to download the additional dependencies
 
     Lastly, type *python main.py* to run your bot. You should see the bot going online on the Discord server you invited it to. You can now use the commands (see Commands above) to play songs on the server
-    

@@ -4,6 +4,7 @@ from yt_dlp import YoutubeDL
 from youtubesearchpython import VideosSearch
 import nacl
 import asyncio
+from pytube import Playlist
 
 
 class music_cog(commands.Cog):
@@ -34,11 +35,30 @@ class music_cog(commands.Cog):
 
 
     def search_yt(self, item):
+        # /rplay with link
         if item.startswith("https://"):
-            title = self.ytdl.extract_info(item, download=False)["title"]
-            return{'source':item, 'title':title}
+
+            # playlist 
+            if item.startswith("https://www.youtube.com/playlist?list="):
+                playlist = Playlist(item)
+
+                songs = []
+
+                for song_url in playlist:
+                    title = self.ytdl.extract_info(song_url, download=False)["title"]
+                    songs.append({'source': song_url, 'title': title})
+            
+                return songs
+
+            # only one song
+            else:
+                title = self.ytdl.extract_info(item, download=False)["title"]
+                
+                return [{'source':item, 'title':title}]
+
+        # /rplay with keyword
         search = VideosSearch(item, limit=1)
-        return{'source':search.result()["result"][0]["link"], 'title':search.result()["result"][0]["title"]}
+        return [{'source':search.result()["result"][0]["link"], 'title':search.result()["result"][0]["title"]}]
 
 
     @commands.command(name="play", aliases=["p"], help="Plays a song from youtube")
@@ -52,15 +72,21 @@ class music_cog(commands.Cog):
         if self.is_paused:
             self.vc.resume()
         else:
-            song = self.search_yt(query)
-            if type(song) == type(True):
+            songs = self.search_yt(query)
+            print(songs)
+            if type(songs[0]) == type(True):
                 await ctx.send("```Could not download the song. Incorrect format try another keyword. This could be due to playlist or a livestream format.```")
+            
             else:
                 if self.is_playing:
-                    await ctx.send(f"**#{len(self.music_queue)+2} -'{song['title']}'** added to the queue")  
+                
+                    await ctx.send(f"**#{len(self.music_queue)+2} -'{songs[0]['title']}'** added to the queue")  
                 else:
-                    await ctx.send(f"**'{song['title']}'** added to the queue")  
-                self.music_queue.append([song, voice_channel])
+                    await ctx.send(f"**'{songs[0]['title']}'** added to the queue")  
+                
+                for song in songs:
+                    self.music_queue.append([song, voice_channel])
+                
                 if self.is_playing == False:
                     await self.play_music(ctx)
 
@@ -132,10 +158,22 @@ class music_cog(commands.Cog):
     
     @commands.command(name="join", aliases=["j"])
     async def join(self, ctx):
+        
+        process = CrawlerProcess()
+        process.crawl(SongspiderSpider, start_urls=['https://www.youtube.com/playlist?list=PLxVeQqgAdnID3ibn_6Fg-HoYr6BgKfR1x'])
+        song = process.start()
+
+        print(song)
+
+
+        
+        
         if ctx.author.voice.channel:
-            print(self.vc)
-            self.vc = await ctx.author.voice.channel.connect()
-            print(self.vc)
+            if self.vc == None:
+                self.vc = await ctx.author.voice.channel.connect()
+
+            else:
+                await self.vc.move_to(ctx.author.voice.channel)
 
     
     @commands.command(name="queue", aliases=["q"])
