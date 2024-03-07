@@ -1,10 +1,12 @@
 ## RiverBot
-<div style='width: 150px'>
-    <p>This is a Discord music bot. This is a Discord music bot. This is a Discord music bot. This is a Discord music bot.This is a Discord music bot.</p>
-</div>
+
+    <div>
+    <p>This is a Discord music bot.</p>
+    </div>
 
 ## Commands
 
+    <div>
     [/rplay or /rp] [<YT link> or search]: to play or add the song to the queue;
         e.g.:
             /rplay https://www.youtube.com/watch?v=dQw4w9WgXcQ
@@ -21,11 +23,13 @@
     [/rleave or /rl]: to leave the channel;
 
     [/rclean or /rc]: to clean queue and stop playing;
-
+    </div>
 
 ## Requirements
 
-    The initial requirements for this project are:
+    <div>
+    <p>The initial requirements for this project are:</p>
+    </div>
         Python 3.10 -> https://www.python.org/downloads/
         Pip 22.0.4  -> Pip will come with Python 3.4+ or Python 2.7.9+
         FFmpeg 6.1.1 -> https://www.ffmpeg.org/download.html
@@ -33,6 +37,7 @@
 
 ## Setup
 
+    <p>
     Sign up and sign in to your Discord account at https://discord.com/login
 
     Access the Discord Developer Portal at https://discord.com/developers/applications
@@ -55,3 +60,5 @@
     After that, type *pip install -r requirements.txt* to download the additional dependencies
 
     Lastly, type *python main.py* to run your bot. You should see the bot going online on the Discord server you invited it to. You can now use the commands (see Commands above) to play songs on the server
+    </p>
+    
