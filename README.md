@@ -1,4 +1,4 @@
-<style>
+<!-- <style>
 h1, h2 {
     color: rgb(120, 150, 200);
 }
@@ -20,6 +20,7 @@ h1, h2 {
     padding-bottom: 2px;
 }
 </style>
+-->
 
 # RiverBot
 <div class='riverbot-div'>
